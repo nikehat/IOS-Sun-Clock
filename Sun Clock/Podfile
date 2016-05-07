@@ -1,0 +1,2 @@
+platform :ios, '10.10'
+pod 'EDSunriseSet', '~> 1.0'
