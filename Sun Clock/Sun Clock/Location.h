@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface Location : NSObject
+@interface Location : NSObject <NSCoding>
 
 @property (nonatomic, retain) NSString *city;
 @property (nonatomic, retain) NSString *state;

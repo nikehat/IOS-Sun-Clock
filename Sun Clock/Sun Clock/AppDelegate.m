@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // Find the root ViewController object
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    ViewController *mainController = (ViewController *)[navController.viewControllers objectAtIndex:0];
+    
+    // Create directory if it already doesn't exist
+    [self createDir];
+    
+    // If files exist, load them into the root ViewController
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *projectDir = [self getDirectoryPath];
+    NSString *locationDir = [projectDir stringByAppendingString:@"/selectedLocation.plist"];
+    if ([fm fileExistsAtPath:locationDir]) {
+        mainController.selectedLocation = [NSKeyedUnarchiver unarchiveObjectWithFile:locationDir];
+    }
+    
     return YES;
 }
 
@@ -25,9 +40,16 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
+// Encode selectedLocation
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    ViewController *mainController = (ViewController *)[navController.viewControllers objectAtIndex:0];
+    NSString *archivePath = [self getDirectoryPath];
+
+    NSString *locationPath = [archivePath stringByAppendingString:@"/selectedLocation.plist"];
+    if ([NSKeyedArchiver archiveRootObject:[mainController selectedLocation] toFile:locationPath]) {
+        NSLog(@"Archived selectedLocation");
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -40,6 +62,28 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+// Create directory if it already doesn't exist
+- (void)createDir {
+    NSString *projectDir = [self getDirectoryPath];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *theError = nil;
+    if (![fm fileExistsAtPath:projectDir]) {
+        [fm createDirectoryAtPath:projectDir withIntermediateDirectories:YES attributes:nil error:&theError];
+        NSLog(@"created private docs dir");
+    }
+}
+
+- (NSString *)getDirectoryPath {
+    NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
+    NSArray *libraryDir = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryPath = ([libraryDir count] > 0) ? [libraryDir objectAtIndex:0] : nil;
+    NSString *privateDocsDir = [libraryPath stringByAppendingString:@"/Private Documents/"];
+    NSString *projectDir = [privateDocsDir stringByAppendingString:bundleID];
+    //NSLog(@"%@", projectDir);
+    return projectDir;
 }
 
 @end
