@@ -15,5 +15,6 @@
 @property (strong) NSArray *states;
 @property (strong) NSArray *stateAbbreviations;
 @property (strong) NSString *selectedState;
+@property (weak) Location *selectedLocation;
 
 @end

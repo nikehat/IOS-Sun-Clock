@@ -18,7 +18,8 @@
 		84A78A7E1CDDAADD0057DD31 /* StatesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A78A7D1CDDAADD0057DD31 /* StatesTableViewController.m */; };
 		84A78A811CDDB0D80057DD31 /* CitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A78A801CDDB0D80057DD31 /* CitiesTableViewController.m */; };
 		84A78A851CDDD91B0057DD31 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A78A841CDDD91B0057DD31 /* libsqlite3.dylib */; };
-		84A78A8F1CDDE1780057DD31 /* cities.sq3 in Resources */ = {isa = PBXBuildFile; fileRef = 84A78A8E1CDDE16C0057DD31 /* cities.sq3 */; };
+		84A78A921CDEE5090057DD31 /* DrawSunClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A78A911CDEE5090057DD31 /* DrawSunClock.m */; };
+		84A78B3D1CE145EB0057DD31 /* us_cities_with_timezones.sl3 in Resources */ = {isa = PBXBuildFile; fileRef = 84A78B3C1CE145900057DD31 /* us_cities_with_timezones.sl3 */; };
 		F2AB0F49C166AC8BF9AB1885 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E1533CE95752F426725284 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +45,9 @@
 		84A78A801CDDB0D80057DD31 /* CitiesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesTableViewController.m; sourceTree = "<group>"; };
 		84A78A821CDDBC190057DD31 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		84A78A841CDDD91B0057DD31 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
-		84A78A8E1CDDE16C0057DD31 /* cities.sq3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cities.sq3; sourceTree = "<group>"; };
+		84A78A901CDEE5090057DD31 /* DrawSunClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawSunClock.h; sourceTree = "<group>"; };
+		84A78A911CDEE5090057DD31 /* DrawSunClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawSunClock.m; sourceTree = "<group>"; };
+		84A78B3C1CE145900057DD31 /* us_cities_with_timezones.sl3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = us_cities_with_timezones.sl3; sourceTree = "<group>"; };
 		85229329B8584BEFF792458C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B8E1533CE95752F426725284 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -103,11 +106,12 @@
 				841BAEF81CD48CF300F30609 /* Main.storyboard */,
 				841BAEFB1CD48CF300F30609 /* Assets.xcassets */,
 				841BAEFD1CD48CF300F30609 /* LaunchScreen.storyboard */,
-				841BAF001CD48CF300F30609 /* Info.plist */,
 				84A78A791CDCA2630057DD31 /* Location.h */,
 				84A78A7A1CDCA2630057DD31 /* Location.m */,
 				84A78A761CDCA21D0057DD31 /* CitiesDatabase.h */,
 				84A78A771CDCA21D0057DD31 /* CitiesDatabase.m */,
+				84A78A901CDEE5090057DD31 /* DrawSunClock.h */,
+				84A78A911CDEE5090057DD31 /* DrawSunClock.m */,
 				841BAEEF1CD48CF300F30609 /* Supporting Files */,
 			);
 			path = "Sun Clock";
@@ -116,7 +120,8 @@
 		841BAEEF1CD48CF300F30609 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				84A78A8E1CDDE16C0057DD31 /* cities.sq3 */,
+				841BAF001CD48CF300F30609 /* Info.plist */,
+				84A78B3C1CE145900057DD31 /* us_cities_with_timezones.sl3 */,
 				841BAEF01CD48CF300F30609 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -192,7 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A78A8F1CDDE1780057DD31 /* cities.sq3 in Resources */,
+				84A78B3D1CE145EB0057DD31 /* us_cities_with_timezones.sl3 in Resources */,
 				841BAEFF1CD48CF300F30609 /* LaunchScreen.storyboard in Resources */,
 				841BAEFC1CD48CF300F30609 /* Assets.xcassets in Resources */,
 				841BAEFA1CD48CF300F30609 /* Main.storyboard in Resources */,
@@ -255,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841BAEF71CD48CF300F30609 /* ViewController.m in Sources */,
+				84A78A921CDEE5090057DD31 /* DrawSunClock.m in Sources */,
 				84A78A7B1CDCA2630057DD31 /* Location.m in Sources */,
 				84A78A781CDCA21D0057DD31 /* CitiesDatabase.m in Sources */,
 				84A78A811CDDB0D80057DD31 /* CitiesTableViewController.m in Sources */,

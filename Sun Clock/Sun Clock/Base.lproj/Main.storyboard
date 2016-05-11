@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Cities Table View Controller-->
@@ -15,15 +16,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityCell" id="kdT-yQ-cEz">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kdT-yQ-cEz" id="mpm-os-wYR">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="U90-2M-b2i"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -46,7 +44,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StateCell" id="ZbK-gl-3nR">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZbK-gl-3nR" id="Q2z-6e-f5U">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -75,10 +73,134 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="DrawSunClock">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hZo-Ph-BMy">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DsY-cr-bsC">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-mp-KoI">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3z-Ph-S2k">
+                                <rect key="frame" x="437" y="72" width="143" height="30"/>
+                                <state key="normal" title="Locate Using GPS"/>
+                                <connections>
+                                    <action selector="gpsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5ut-UT-UjG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astro. Twilight Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GE8-8s-0Xp">
+                                <rect key="frame" x="20" y="469" width="140" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b0-dS-VQz" userLabel="Astro. Start Result">
+                                <rect key="frame" x="20" y="489" width="38" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nautical Twilight Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZx-Dz-1Ns">
+                                <rect key="frame" x="20" y="509" width="155" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMa-OS-O4M" userLabel="Nautical Start Result">
+                                <rect key="frame" x="20" y="529" width="38" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Civil Twilight Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6d-H0-iIu">
+                                <rect key="frame" x="20" y="549" width="128" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofo-iJ-8qi" userLabel="Civil Start Result">
+                                <rect key="frame" x="20" y="569" width="38" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astro. Twilight End:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6a-5S-8rH">
+                                <rect key="frame" x="432" y="469" width="132" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nautical Twilight End:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQE-mI-3Tp">
+                                <rect key="frame" x="432" y="509" width="148" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIJ-2k-KbK" userLabel="Nautical End Result">
+                                <rect key="frame" x="432" y="529" width="38" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Civil Twilight End:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTm-lx-8jt">
+                                <rect key="frame" x="432" y="549" width="121" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6G-0C-IwF" userLabel="Civil End Result">
+                                <rect key="frame" x="432" y="569" width="38" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dn7-Y9-fvt" userLabel="Astro. Start Result">
+                                <rect key="frame" x="432" y="489" width="38" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19187973484848475" green="0.19187973484848475" blue="0.19187973484848475" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ofo-iJ-8qi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0p5-pb-uF0"/>
+                            <constraint firstItem="XZx-Dz-1Ns" firstAttribute="top" secondItem="6b0-dS-VQz" secondAttribute="bottom" constant="2" id="0tZ-KY-si1"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ofo-iJ-8qi" secondAttribute="bottom" constant="13" id="6fL-Qg-idP"/>
+                            <constraint firstItem="hZo-Ph-BMy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6hw-Ao-398"/>
+                            <constraint firstItem="fQE-mI-3Tp" firstAttribute="top" secondItem="s6a-5S-8rH" secondAttribute="bottom" constant="22" id="7K7-Sz-0cn"/>
+                            <constraint firstItem="6b0-dS-VQz" firstAttribute="top" secondItem="GE8-8s-0Xp" secondAttribute="bottom" constant="2" id="9lQ-pp-wCJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dn7-Y9-fvt" secondAttribute="trailing" constant="110" id="Cee-UQ-j6b"/>
+                            <constraint firstItem="e6d-H0-iIu" firstAttribute="top" secondItem="SMa-OS-O4M" secondAttribute="bottom" constant="2" id="DyM-hD-LRD"/>
+                            <constraint firstItem="6b0-dS-VQz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="FGs-QY-1IF"/>
+                            <constraint firstItem="fQE-mI-3Tp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Fgn-1T-KNh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cTm-lx-8jt" secondAttribute="bottom" constant="33" id="HLh-5L-fyf"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="e6d-H0-iIu" secondAttribute="bottom" constant="33" id="K9q-vs-7KA"/>
+                            <constraint firstItem="e6d-H0-iIu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="LS8-Li-w0T"/>
+                            <constraint firstItem="CIJ-2k-KbK" firstAttribute="top" secondItem="dn7-Y9-fvt" secondAttribute="bottom" constant="22" id="Ojj-yc-rd3"/>
+                            <constraint firstItem="hZo-Ph-BMy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Qi1-Tg-6cS"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="J6G-0C-IwF" secondAttribute="bottom" constant="13" id="Sef-yy-Bui"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="J6G-0C-IwF" secondAttribute="trailing" constant="110" id="ZvA-y5-kxT"/>
+                            <constraint firstItem="s6a-5S-8rH" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-16" id="adm-pH-hQ0"/>
+                            <constraint firstItem="SMa-OS-O4M" firstAttribute="top" secondItem="XZx-Dz-1Ns" secondAttribute="bottom" constant="2" id="bXg-zr-He5"/>
+                            <constraint firstItem="GE8-8s-0Xp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bf4-Ya-l4J"/>
+                            <constraint firstItem="SMa-OS-O4M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cKY-cK-eUD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cTm-lx-8jt" secondAttribute="trailing" constant="27" id="hQp-M2-MHj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CIJ-2k-KbK" secondAttribute="trailing" constant="110" id="nGK-4o-hZD"/>
+                            <constraint firstItem="D3z-Ph-S2k" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="p9R-OX-Sei"/>
+                            <constraint firstItem="D3z-Ph-S2k" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qUn-cD-yVI"/>
+                            <constraint firstItem="XZx-Dz-1Ns" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="rxd-eh-qjZ"/>
+                            <constraint firstItem="J6G-0C-IwF" firstAttribute="top" secondItem="CIJ-2k-KbK" secondAttribute="bottom" constant="22" id="wnH-IQ-Afr"/>
+                            <constraint firstItem="cTm-lx-8jt" firstAttribute="top" secondItem="fQE-mI-3Tp" secondAttribute="bottom" constant="22" id="xyJ-iQ-srB"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RFK-YV-Fbp">
                         <barButtonItem key="rightBarButtonItem" title="Select Location" id="ewJ-7C-eWW">
@@ -87,6 +209,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="updatingGPSIndicator" destination="WPt-mp-KoI" id="1s5-2F-heX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -111,7 +236,4 @@
             <point key="canvasLocation" x="411" y="277"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="U90-2M-b2i"/>
-    </inferredMetricsTieBreakers>
 </document>

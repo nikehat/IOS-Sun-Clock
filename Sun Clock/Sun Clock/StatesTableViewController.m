@@ -18,10 +18,10 @@
 @synthesize states;
 @synthesize stateAbbreviations;
 @synthesize selectedState;
+@synthesize selectedLocation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -58,7 +58,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     selectedState = [stateAbbreviations objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"StateToCitiesSegue" sender:self];
-    NSLog(@"1");
 }
 
 /*
@@ -102,7 +101,7 @@
     CitiesTableViewController *destinationVC = (CitiesTableViewController *)[segue destinationViewController];
     NSArray *citiesDatabase = [[CitiesDatabase database] citiesOfState:selectedState];
     destinationVC.cities = citiesDatabase;
-    NSLog(@"2");
+    destinationVC.selectedLocation = self.selectedLocation;
 }
 
 @end

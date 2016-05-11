@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "EDSunriseSet.h"
+#import "Location.h"
+#import "StatesTableViewController.h"
+#import "DrawSunClock.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<CLLocationManagerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *outputLabel;
+@property (strong) Location *selectedLocation;
+@property (strong) CLLocationManager *locationManager;
+@property (strong) CLLocation *bestEffortAtLocation;
+@property (strong) NSString *stateString;
+@property (strong) CLGeocoder *geocoder;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *updatingGPSIndicator;
 
 @end
 

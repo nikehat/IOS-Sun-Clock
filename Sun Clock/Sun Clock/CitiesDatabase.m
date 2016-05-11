@@ -24,7 +24,7 @@ static CitiesDatabase* _databaseObj;
 - (id) init{
     self = [super init];
     if (self) {
-    NSString* dbpath = [[NSBundle mainBundle] pathForResource:@"cities" ofType:@"sq3"];
+        NSString* dbpath = [[NSBundle mainBundle] pathForResource:@"us_cities_with_timezones" ofType:@"sl3"];
         if (sqlite3_open([dbpath UTF8String], &_databaseConnection) != SQLITE_OK) {
             NSLog(@"Failed to open database.");
         }
@@ -37,41 +37,46 @@ static CitiesDatabase* _databaseObj;
     sqlite3_close(_databaseConnection);
 }
 
-- (NSArray *) citiesOfState:(NSString *)state {
+- (NSArray *) citiesOfState:(NSString *)aState {
+    NSString* query = [NSString stringWithFormat: @"SELECT * FROM cities where state='%@';", aState];
+    return [self databaseFromQuery:query];
+}
+
+- (NSArray*) allLocations {
+    NSString* query = @"SELECT * FROM cities;";
+    return [self databaseFromQuery:query];
+}
+
+- (NSArray *)databaseFromQuery:(NSString *)query {
     NSMutableArray* rv = [[NSMutableArray alloc] init];
-    NSString* query = [NSString stringWithFormat: @"SELECT * FROM cities where region='%@';", state];
     sqlite3_stmt *stmt;
     const unsigned char* text;
-    NSString *country, *city, *accentcity, *region;
+    NSString *city, *state, *timeZone;
     double longitude, latitude;
-    int population;
     if( sqlite3_prepare_v2(_databaseConnection, [query UTF8String], [query length], &stmt, nil) == SQLITE_OK){
         while( sqlite3_step(stmt) == SQLITE_ROW){
             text = sqlite3_column_text(stmt, 0);
             if( text )
-                country = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
-            else
-                country = nil;
-            text = sqlite3_column_text(stmt, 1);
-            if(text)
                 city = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
             else
                 city = nil;
-            text = sqlite3_column_text(stmt, 2);
+            
+            text = sqlite3_column_text(stmt, 1);
             if(text)
-                accentcity = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
+                state = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
             else
-                accentcity = nil;
-            text = sqlite3_column_text(stmt, 3);
+                state = nil;
+            
+            latitude = sqlite3_column_double(stmt, 2);
+            longitude = sqlite3_column_double(stmt, 3);
+            
+            text = sqlite3_column_text(stmt, 4);
             if(text)
-                region = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
+                timeZone = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
             else
-                region = nil;
-            population = sqlite3_column_double(stmt, 4);
-            longitude = sqlite3_column_double(stmt, 5);
-            latitude = sqlite3_column_double(stmt, 6);
-            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(longitude, latitude);
-            Location *thisLocation = [[Location alloc] initWithCounty:country andCity: city andAccentCity: accentcity andRegion: region andPopulation: population andCoordinate: coord];
+                timeZone = nil;
+            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(latitude, longitude);
+            Location *thisLocation = [[Location alloc] initWithCity:city andState:state andTimeZone:[self timezoneFromString:timeZone] andCoordinate:coord];
             [rv addObject: thisLocation];
         }
         sqlite3_finalize(stmt);
@@ -79,47 +84,25 @@ static CitiesDatabase* _databaseObj;
     return (NSArray *)rv;
 }
 
-- (NSArray*) allLocations
-{
-    NSMutableArray* rv = [[NSMutableArray alloc] init];
-    NSString* query = @"SELECT * FROM cities;";
-    sqlite3_stmt *stmt;
-    const unsigned char* text;
-    NSString *country, *city, *accentcity, *region;
-    double longitude, latitude;
-    int population;
-    if( sqlite3_prepare_v2(_databaseConnection, [query UTF8String], [query length], &stmt, nil) == SQLITE_OK){
-        while( sqlite3_step(stmt) == SQLITE_ROW){
-            text = sqlite3_column_text(stmt, 0);
-            if( text )
-                country = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
-            else
-                country = nil;
-            text = sqlite3_column_text(stmt, 1);
-            if(text)
-                city = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
-            else
-                city = nil;
-            text = sqlite3_column_text(stmt, 2);
-            if(text)
-                accentcity = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
-            else
-                accentcity = nil;
-            text = sqlite3_column_text(stmt, 3);
-            if(text)
-                region = [NSString stringWithCString: (const char*)text encoding:NSUTF8StringEncoding];
-            else
-                region = nil;
-            population = sqlite3_column_double(stmt, 4);
-            longitude = sqlite3_column_double(stmt, 5);
-            latitude = sqlite3_column_double(stmt, 6);
-            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(longitude, latitude);
-            Location *thisLocation = [[Location alloc] initWithCounty:country andCity: city andAccentCity: accentcity andRegion: region andPopulation: population andCoordinate: coord];
-            [rv addObject: thisLocation];
-        }
-        sqlite3_finalize(stmt);
-    }
-    return rv;
+- (NSTimeZone *)timezoneFromString:(NSString *)zoneString {
+    NSTimeZone *tz;
+    if ([zoneString isEqualToString:@"Mountain"])
+        tz = [[NSTimeZone alloc] initWithName:@"America/Denver"];
+    else if ([zoneString isEqualToString:@"Arizona"])
+        tz = [[NSTimeZone alloc] initWithName:@"America/Phoenix"];
+    else if ([zoneString isEqualToString:@"Eastern"])
+        tz = [[NSTimeZone alloc] initWithName:@"America/New_York"];
+    else if ([zoneString isEqualToString:@"Central"])
+        tz = [[NSTimeZone alloc] initWithName:@"America/Chicago"];
+    else if ([zoneString isEqualToString:@"Pacific"])
+        tz = [[NSTimeZone alloc] initWithName:@"America/Los_Angeles"];
+    else if ([zoneString isEqualToString:@"Alaska"])
+        tz = [[NSTimeZone alloc] initWithName:@"America/Anchorage"];
+    else if ([zoneString isEqualToString:@"Hawaii"])
+        tz = [[NSTimeZone alloc] initWithName:@"Pacific/Honolulu"];
+    else
+        tz = [[NSTimeZone alloc] initWithName:zoneString];
+    return tz;
 }
 
 @end

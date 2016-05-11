@@ -11,15 +11,15 @@
 
 @interface Location : NSObject
 
-@property (nonatomic, retain) NSString* country;
-@property (nonatomic, retain) NSString* city;
-@property (nonatomic, retain) NSString* accentCity;
-@property (nonatomic, retain) NSString* region;
-@property (nonatomic, retain) NSNumber* population;
-@property (readonly) CLLocationCoordinate2D coord;
+@property (nonatomic, retain) NSString *city;
+@property (nonatomic, retain) NSString *state;
+@property (nonatomic, retain) NSTimeZone *timeZone;
+@property CLLocationCoordinate2D coord;
 
-- (id) initWithCounty: (NSString*) theCountry andCity: (NSString*) theCity andAccentCity: (NSString*) theAccentCity andRegion: (NSString*) theRegion andPopulation: (int) thePopulation andCoordinate: (CLLocationCoordinate2D) theCoordinate;
+- (id) initWithCity: (NSString *) theCity andState: (NSString *) theState andTimeZone: (NSTimeZone *) theTimeZone andCoordinate: (CLLocationCoordinate2D) theCoordinate;
 
-- (NSString*) description;
+- (void)copyValues:(Location *) otherLocation;
+
+- (NSString *) description;
 
 @end

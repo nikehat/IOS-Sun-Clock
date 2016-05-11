@@ -12,5 +12,6 @@
 @interface CitiesTableViewController : UITableViewController
 
 @property (strong) NSArray *cities;
+@property (weak) Location *selectedLocation;
 
 @end

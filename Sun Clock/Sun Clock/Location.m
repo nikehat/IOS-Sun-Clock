@@ -10,30 +10,33 @@
 
 @implementation Location
 
-@synthesize country;
 @synthesize city;
-@synthesize accentCity;
-@synthesize region;
-@synthesize population;
+@synthesize state;
+@synthesize timeZone;
 @synthesize coord;
 
-- (id) initWithCounty: (NSString*) theCountry andCity: (NSString*) theCity andAccentCity: (NSString*) theAccentCity andRegion: (NSString*) theRegion andPopulation: (int) thePopulation andCoordinate: (CLLocationCoordinate2D) theCoordinate;
+- (id) initWithCity: (NSString *) theCity andState: (NSString *) theState andTimeZone: (NSTimeZone *) theTimeZone andCoordinate: (CLLocationCoordinate2D) theCoordinate;
 {
     self = [super init];
     if( self ){
-        country = theCountry;
         city = theCity;
-        accentCity = theAccentCity;
-        region = theRegion;
-        population = [NSNumber numberWithInt:thePopulation];
-        coord = CLLocationCoordinate2DMake(theCoordinate.longitude, theCoordinate.latitude);
+        state = theState;
+        timeZone = theTimeZone;
+        coord = CLLocationCoordinate2DMake(theCoordinate.latitude, theCoordinate.longitude);
     }
     return self;
 }
 
-- (NSString*) description
+- (void)copyValues:(Location *)otherLocation {
+    city = [otherLocation city];
+    state = [otherLocation state];
+    timeZone = [otherLocation timeZone];
+    coord = [otherLocation coord];
+}
+
+- (NSString *) description
 {
-    return [NSString stringWithFormat:@"%@ %@ %@ %d %g %g", city, region, country, [population integerValue], coord.latitude, coord.longitude];
+    return [NSString stringWithFormat:@"City: %@; State: %@; Time Zone: %@; Latitude:  %g; Longitude: %g", city, state, timeZone, coord.latitude, coord.longitude];
 }
 
 /*- (CLLocationCoordinate2D*) coord

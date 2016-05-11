@@ -15,6 +15,7 @@
 @implementation CitiesTableViewController
 
 @synthesize cities;
+@synthesize selectedLocation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,11 +45,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CityCell" forIndexPath:indexPath];
     
-    Location *city = [cities objectAtIndex:indexPath.row];
-    cell.textLabel.text = [city accentCity];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%g, %g)", [city region], city.coord.longitude, city.coord.latitude];
+    Location *locationCity = [cities objectAtIndex:indexPath.row];
+    cell.textLabel.text = [locationCity city];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%g, %g)", [locationCity state], locationCity.coord.latitude, locationCity.coord.longitude];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Location *selectedCity = [cities objectAtIndex:indexPath.row];
+    [selectedLocation copyValues:selectedCity];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /*
