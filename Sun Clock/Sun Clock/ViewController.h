@@ -21,8 +21,14 @@
 @property (strong) NSString *stateString;
 @property (strong) CLGeocoder *geocoder;
 @property (strong) EDSunriseSet *sunriseSet;
-
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *updatingGPSIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *astroTwilightStartLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nauticalTwilightStartLabel;
+@property (weak, nonatomic) IBOutlet UILabel *civilTwilightStartLabel;
+@property (weak, nonatomic) IBOutlet UILabel *astroTwilightEndLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nauticalTwilightEndLabel;
+@property (weak, nonatomic) IBOutlet UILabel *civilTwilightEndLabel;
 
 @end
 

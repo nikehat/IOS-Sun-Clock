@@ -10,13 +10,6 @@
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *astroTwilightStartLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nauticalTwilightStartLabel;
-@property (weak, nonatomic) IBOutlet UILabel *civilTwilightStartLabel;
-@property (weak, nonatomic) IBOutlet UILabel *astroTwilightEndLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nauticalTwilightEndLabel;
-@property (weak, nonatomic) IBOutlet UILabel *civilTwilightEndLabel;
-
 @end
 
 @implementation ViewController
@@ -35,6 +28,7 @@
 @synthesize nauticalTwilightStartLabel;
 @synthesize civilTwilightEndLabel;
 @synthesize civilTwilightStartLabel;
+@synthesize cityLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,14 +39,14 @@
     locationManager = [[CLLocationManager alloc] init];
 }
 
-// Update drawing
+// Update drawing and labels
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"selectedLocation: %@", selectedLocation);
     
     sunriseSet = [[EDSunriseSet alloc] initWithTimezone:selectedLocation.timeZone latitude:selectedLocation.coord.latitude longitude:selectedLocation.coord.longitude];
     [sunriseSet calculate:[NSDate date]];
     DrawSunClock *drawBoard = (DrawSunClock *)self.view;
-    if (selectedLocation.coord.latitude != 0 && selectedLocation.coord.longitude != 0) {
+    if (selectedLocation.state != nil) {
         drawBoard.civilTwilightStart = [sunriseSet localCivilTwilightStart];
         drawBoard.civilTwilightEnd = [sunriseSet localCivilTwilightEnd];
         drawBoard.nauticalTwilightStart = [sunriseSet localNauticalCivilTwilightStart];
@@ -61,6 +55,7 @@
         drawBoard.astronomicalTwilightEnd = [sunriseSet localAstronomicalTwilightEnd];
         drawBoard.sunrise = [sunriseSet localSunrise];
         drawBoard.sunset = [sunriseSet localSunset];
+        cityLabel.text = selectedLocation.city;
         [self updateLabels];
     }
     [self.view setNeedsDisplay];
@@ -124,12 +119,14 @@
                     selectedLocation.state = [p administrativeArea];
                     selectedLocation.timeZone = [p timeZone];
                 }
+                [self viewDidAppear:NO]; // block done asynchronously, update view once finished
             }];
         }
         else {
             selectedLocation.city = @"Unknown city";
             selectedLocation.state = @"Unkown state";
             selectedLocation.timeZone = [[NSTimeZone alloc] initWithName:@"America/Los_Angeles"];
+            [self viewDidAppear:NO]; // block done asynchronously, update view once finished
         }
         selectedLocation.coord = bestEffortAtLocation.coordinate;
     }

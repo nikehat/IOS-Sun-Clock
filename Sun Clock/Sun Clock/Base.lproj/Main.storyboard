@@ -97,25 +97,25 @@
                                     <action selector="gpsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5ut-UT-UjG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Astro. Twilight Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GE8-8s-0Xp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astro. Twilight Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GE8-8s-0Xp">
                                 <rect key="frame" x="20" y="469" width="140" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b0-dS-VQz" userLabel="Astro. Start Result">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="       " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b0-dS-VQz" userLabel="Astro. Start Result">
                                 <rect key="frame" x="20" y="489" width="38" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Nautical Twilight Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZx-Dz-1Ns">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nautical Twilight Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZx-Dz-1Ns">
                                 <rect key="frame" x="20" y="509" width="155" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMa-OS-O4M" userLabel="Nautical Start Result">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="        " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMa-OS-O4M" userLabel="Nautical Start Result">
                                 <rect key="frame" x="20" y="529" width="38" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -169,11 +169,18 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3z-Mz-TXO" userLabel="City Label">
+                                <rect key="frame" x="298" y="129" width="5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.19187973484848475" green="0.19187973484848475" blue="0.19187973484848475" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ofo-iJ-8qi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0p5-pb-uF0"/>
                             <constraint firstItem="XZx-Dz-1Ns" firstAttribute="top" secondItem="6b0-dS-VQz" secondAttribute="bottom" constant="2" id="0tZ-KY-si1"/>
+                            <constraint firstItem="u3z-Mz-TXO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5BL-7B-P8B"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ofo-iJ-8qi" secondAttribute="bottom" constant="13" id="6fL-Qg-idP"/>
                             <constraint firstItem="hZo-Ph-BMy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6hw-Ao-398"/>
                             <constraint firstItem="fQE-mI-3Tp" firstAttribute="top" secondItem="s6a-5S-8rH" secondAttribute="bottom" constant="22" id="7K7-Sz-0cn"/>
@@ -184,6 +191,7 @@
                             <constraint firstItem="fQE-mI-3Tp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Fgn-1T-KNh"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cTm-lx-8jt" secondAttribute="bottom" constant="33" id="HLh-5L-fyf"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="e6d-H0-iIu" secondAttribute="bottom" constant="33" id="K9q-vs-7KA"/>
+                            <constraint firstItem="u3z-Mz-TXO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="65" id="LQj-2j-ep4"/>
                             <constraint firstItem="e6d-H0-iIu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="LS8-Li-w0T"/>
                             <constraint firstItem="CIJ-2k-KbK" firstAttribute="top" secondItem="dn7-Y9-fvt" secondAttribute="bottom" constant="22" id="Ojj-yc-rd3"/>
                             <constraint firstItem="hZo-Ph-BMy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Qi1-Tg-6cS"/>
@@ -212,6 +220,7 @@
                     <connections>
                         <outlet property="astroTwilightEndLabel" destination="dn7-Y9-fvt" id="KNh-Kw-VLD"/>
                         <outlet property="astroTwilightStartLabel" destination="6b0-dS-VQz" id="Jyr-wB-ebd"/>
+                        <outlet property="cityLabel" destination="u3z-Mz-TXO" id="gYb-LK-nZp"/>
                         <outlet property="civilTwilightEndLabel" destination="J6G-0C-IwF" id="wi4-fv-vaI"/>
                         <outlet property="civilTwilightStartLabel" destination="ofo-iJ-8qi" id="CdE-9G-O9d"/>
                         <outlet property="nauticalTwilightEndLabel" destination="CIJ-2k-KbK" id="2vx-tM-mt0"/>
