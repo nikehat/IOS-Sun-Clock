@@ -20,6 +20,7 @@
 @property (strong) CLLocation *bestEffortAtLocation;
 @property (strong) NSString *stateString;
 @property (strong) CLGeocoder *geocoder;
+@property (strong) EDSunriseSet *sunriseSet;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *updatingGPSIndicator;
 

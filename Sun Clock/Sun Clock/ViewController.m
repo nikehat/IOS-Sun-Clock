@@ -10,16 +10,31 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *astroTwilightStartLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nauticalTwilightStartLabel;
+@property (weak, nonatomic) IBOutlet UILabel *civilTwilightStartLabel;
+@property (weak, nonatomic) IBOutlet UILabel *astroTwilightEndLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nauticalTwilightEndLabel;
+@property (weak, nonatomic) IBOutlet UILabel *civilTwilightEndLabel;
+
 @end
 
 @implementation ViewController
-
+// instance variables
 @synthesize selectedLocation;
 @synthesize locationManager;
 @synthesize bestEffortAtLocation;
-@synthesize updatingGPSIndicator;
 @synthesize stateString;
 @synthesize geocoder;
+@synthesize sunriseSet;
+// storyboard objects
+@synthesize updatingGPSIndicator;
+@synthesize astroTwilightEndLabel;
+@synthesize astroTwilightStartLabel;
+@synthesize nauticalTwilightEndLabel;
+@synthesize nauticalTwilightStartLabel;
+@synthesize civilTwilightEndLabel;
+@synthesize civilTwilightStartLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,7 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"selectedLocation: %@", selectedLocation);
     
-    EDSunriseSet *sunriseSet = [[EDSunriseSet alloc] initWithTimezone:selectedLocation.timeZone latitude:selectedLocation.coord.latitude longitude:selectedLocation.coord.longitude];
+    sunriseSet = [[EDSunriseSet alloc] initWithTimezone:selectedLocation.timeZone latitude:selectedLocation.coord.latitude longitude:selectedLocation.coord.longitude];
     [sunriseSet calculate:[NSDate date]];
     DrawSunClock *drawBoard = (DrawSunClock *)self.view;
     if (selectedLocation.coord.latitude != 0 && selectedLocation.coord.longitude != 0) {
@@ -46,6 +61,7 @@
         drawBoard.astronomicalTwilightEnd = [sunriseSet localAstronomicalTwilightEnd];
         drawBoard.sunrise = [sunriseSet localSunrise];
         drawBoard.sunset = [sunriseSet localSunset];
+        [self updateLabels];
     }
     [self.view setNeedsDisplay];
 }
@@ -136,6 +152,21 @@
     
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)updateLabels {
+    astroTwilightStartLabel.text = [self hourAndMinutesStringFromDate:sunriseSet.astronomicalTwilightStart];
+    astroTwilightEndLabel.text = [self hourAndMinutesStringFromDate:sunriseSet.astronomicalTwilightEnd];
+    nauticalTwilightStartLabel.text = [self hourAndMinutesStringFromDate:sunriseSet.nauticalTwilightStart];
+    nauticalTwilightEndLabel.text = [self hourAndMinutesStringFromDate:sunriseSet.nauticalTwilightEnd];
+    civilTwilightStartLabel.text = [self hourAndMinutesStringFromDate:sunriseSet.civilTwilightStart];
+    civilTwilightEndLabel.text = [self hourAndMinutesStringFromDate:sunriseSet.civilTwilightEnd];
+}
+
+- (NSString *)hourAndMinutesStringFromDate:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+    return [NSString stringWithFormat:@"%ld:%.2ld", (long)[components hour], (long)[components minute]];
 }
 
 - (void)didReceiveMemoryWarning {
